@@ -54,6 +54,15 @@ module.exports = (appInfo) => {
     secret: "sunshine",
   };
 
+  config.auth = {
+    exclude: [
+      "/home",
+      "/api/user/register",
+      "/api/user/login",
+      "/api/user/logout",
+    ],
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

@@ -1,5 +1,7 @@
 "use strict";
 
+const path = require("path");
+
 /** @type Egg.EggPlugin */
 module.exports = {
   // had enabled by egg
@@ -21,5 +23,10 @@ module.exports = {
   jwt: {
     enable: true,
     package: "egg-jwt",
+  },
+
+  auth: {
+    enable: true,
+    path: path.join(__dirname, "../lib/plugin/egg-auth"),
   },
 };

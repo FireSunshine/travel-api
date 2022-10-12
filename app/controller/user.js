@@ -2,7 +2,6 @@
 
 const { Controller } = require("egg");
 const md5 = require("md5");
-const dayjs = require("dayjs");
 
 class UserController extends Controller {
   async jwySign() {
@@ -59,7 +58,6 @@ class UserController extends Controller {
     const { ctx, app } = this;
     const { username, password } = ctx.request.body;
     const user = await ctx.service.user.getUser(username, password);
-
     if (user) {
       const token = await this.jwySign();
       ctx.body = {
