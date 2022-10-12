@@ -1,12 +1,16 @@
 "use strict";
 
-const { Controller } = require("egg");
 const md5 = require("md5");
+const BaseController = require("./base");
 
-class UserController extends Controller {
-  async jwySign() {
+class UserController extends BaseController {
+  // 根据用户名生成token
+  async jwtSign() {
     const { ctx, app } = this;
-    const username = ctx.request.body.username;
+    // const username = ctx.request.body.username;
+    // 上下文
+    const username = ctx.params("username");
+
     const token = app.jwt.sign(
       {
         username,
@@ -18,16 +22,21 @@ class UserController extends Controller {
     return token;
   }
 
+  parseResasult(ctx, result) {
+    return {
+      ...ctx.helper.unPick(result.dataValues, ["password"]),
+      createTime: ctx.helper.timestamp(result.createTime),
+    };
+  }
+
   // 注册
   async register() {
     const { ctx, app } = this;
-    const params = ctx.request.body;
+    // const params = ctx.request.body;
+    const params = ctx.params();
     const user = await ctx.service.user.getUser(params.username);
     if (user) {
-      ctx.body = {
-        status: 500,
-        message: "用户已经存在",
-      };
+      this.error("用户已经存在");
       return;
     }
 
@@ -37,43 +46,31 @@ class UserController extends Controller {
       createTime: ctx.helper.time(),
     });
     if (result) {
-      const token = await this.jwySign();
-      ctx.body = {
-        status: 200,
-        data: {
-          ...ctx.helper.unPick(result.dataValues, ["password"]),
-          createTime: ctx.helper.timestamp(result.createTime),
-          token,
-        },
-      };
+      const token = await this.jwtSign();
+      this.success({
+        ...this.parseResasult(ctx, result),
+        token,
+      });
     } else {
-      ctx.body = {
-        status: 500,
-        message: "注册用户失败",
-      };
+      this.error("注册用户失败");
     }
   }
 
   // 登录
   async login() {
     const { ctx, app } = this;
-    const { username, password } = ctx.request.body;
+    // const { username, password } = ctx.request.body;
+    const { username, password } = ctx.params();
+
     const user = await ctx.service.user.getUser(username, password);
     if (user) {
-      const token = await this.jwySign();
-      ctx.body = {
-        status: 200,
-        data: {
-          ...ctx.helper.unPick(user.dataValues, ["password"]),
-          createTime: ctx.helper.timestamp(user.createTime),
-          token,
-        },
-      };
+      const token = await this.jwtSign();
+      this.success({
+        ...this.parseResasult(ctx, user),
+        token,
+      });
     } else {
-      ctx.body = {
-        status: 500,
-        message: "用户不存在",
-      };
+      this.error("用户不存在");
     }
   }
 
@@ -83,18 +80,11 @@ class UserController extends Controller {
     const user = await ctx.service.user.getUser(ctx.username);
 
     if (user) {
-      ctx.body = {
-        status: 200,
-        data: {
-          ...ctx.helper.unPick(user.dataValues, ["password"]),
-          createTime: ctx.helper.timestamp(user.createTime),
-        },
-      };
+      this.success({
+        ...this.parseResasult(ctx, user),
+      });
     } else {
-      ctx.body = {
-        status: 500,
-        message: "用户不存在",
-      };
+      this.error("用户不存在");
     }
   }
 
@@ -104,15 +94,9 @@ class UserController extends Controller {
     try {
       // ctx.session[ctx.username] = null;
       await app.redis.del(ctx.username);
-      ctx.body = {
-        status: 200,
-        data: "ok",
-      };
+      this.success("ok");
     } catch (error) {
-      ctx.body = {
-        status: 500,
-        message: "退出登录失败",
-      };
+      thid.error("退出登录失败");
     }
   }
 }
