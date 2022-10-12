@@ -29,4 +29,9 @@ module.exports = {
     enable: true,
     path: path.join(__dirname, "../lib/plugin/egg-auth"),
   },
+
+  redis: {
+    enable: true,
+    package: "egg-redis",
+  },
 };
