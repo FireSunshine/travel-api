@@ -99,6 +99,20 @@ class UserController extends BaseController {
       thid.error("退出登录失败");
     }
   }
+
+  // 编辑用户
+  async editUser() {
+    const { ctx } = this;
+    const result = await ctx.service.user.editUser({
+      ...ctx.params(),
+      updateTime: ctx.helper.time(),
+    });
+    if (result) {
+      this.success(result);
+    } else {
+      this.error("用户信息修改失败");
+    }
+  }
 }
 
 module.exports = UserController;

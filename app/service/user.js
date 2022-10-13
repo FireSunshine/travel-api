@@ -24,6 +24,18 @@ class UserService extends BaseService {
       return result;
     });
   }
+
+  async editUser(pamars) {
+    return this.run(async () => {
+      const { ctx } = this;
+      const result = await ctx.model.User.update(pamars, {
+        where: {
+          username: ctx.username,
+        },
+      });
+      return result;
+    });
+  }
 }
 
 module.exports = UserService;
