@@ -15,6 +15,21 @@ create table `user`(
   primary key(`id`)
 )engine=InnoDB auto_increment=1 default charset=utf8 comment='用户表';
 
+--- 省份表
+create table `province`(
+  `id` int not null auto_increment,
+  `name` varchar(50) default null comment '省份',
+  primary key(`id`)
+)engine=InnoDB auto_increment=1 default charset=utf8 comment='省份表';
+
+--- 城市表
+create table `city` (
+  `id` int not null auto_increment,
+  `name` varchar(50) default null comment '城市',
+  `pid` int default null comment '省份id',
+  primary key(`id`)
+)engine=InnoDB auto_increment=1 default charset=utf8 comment='城市表';
+
 
 -- 民宿表
 create table `house`(
