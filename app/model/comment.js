@@ -13,5 +13,10 @@ module.exports = (app) => {
     createTime: DATE,
   });
 
+  // 多对一
+  Comment.associate = () => {
+    app.model.Comment.belongsTo(app.model.User, { foreignKey: "userId" });
+  };
+
   return Comment;
 };
