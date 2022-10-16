@@ -20,6 +20,17 @@ class HouseController extends BaseController {
     const result = await ctx.service.house.search(ctx.params());
     this.success(result);
   }
+
+  // 民宿详情
+  async detail() {
+    const { ctx, app } = this;
+    const result = await ctx.service.house.detail(ctx.params("id"));
+    if (result) {
+      this.success(result);
+    } else {
+      this.error("获取民宿详情失败");
+    }
+  }
 }
 
 module.exports = HouseController;
