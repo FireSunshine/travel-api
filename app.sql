@@ -36,7 +36,7 @@ create table `house`(
   `id` int not null auto_increment,
   `name` varchar(50) default null comment '房屋名称',
   `info` varchar(150) default null comment '房屋简介',
-  `addres` varchar(200) default null comment '房屋地址',
+  `address` varchar(200) default null comment '房屋地址',
   `price` int default null comment '房屋价格',
   `publishTime` timestamp default null comment '发布时间',
   `cityCode` varchar(10) not null comment '城市编码',

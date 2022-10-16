@@ -13,4 +13,5 @@ module.exports = (app) => {
   router.post("/api/user/logout", controller.user.logout);
   router.post("/api/user/edit", controller.user.editUser);
   router.post("/api/commons/citys", controller.commons.citys);
+  router.post("/api/house/hot", controller.house.hot);
 };

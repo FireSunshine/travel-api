@@ -6,7 +6,7 @@ class CityService extends BaseService {
   async getCity(pid) {
     return this.run(async () => {
       const { ctx } = this;
-      const result = await ctx.model.City.find({
+      const result = await ctx.model.City.findAll({
         where: { pid },
       });
       return result;
