@@ -7,7 +7,7 @@ module.exports = (app) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    orderNumber: STRING(20),
+    order_number: STRING(20),
     userId: INTEGER,
     houseId: INTEGER,
     isPayed: {
@@ -17,13 +17,13 @@ module.exports = (app) => {
     createTime: {
       type: DATE,
       get() {
-        return new Date(this.getDataVaule("createTime")).getTime();
+        return new Date(this.getDataValue("createTime")).getTime();
       },
     },
     updateTime: {
       type: DATE,
       get() {
-        return new Date(this.getDataVaule("updateTime")).getTime();
+        return new Date(this.getDataValue("updateTime")).getTime();
       },
     },
   });
