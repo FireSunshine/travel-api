@@ -6,9 +6,8 @@ class OrdersController extends BaseController {
   // 查询订单状态
   async hasOrder() {
     const { ctx, app } = this;
-    const user = await ctx.service.user.getUser(ctx.username);
     const result = await ctx.service.orders.hasOrder({
-      userId: user.id,
+      userId: ctx.userId,
       houseId: ctx.params("id"),
     });
     this.success(result);
@@ -17,9 +16,8 @@ class OrdersController extends BaseController {
   // 预定
   async addOrder() {
     const { ctx, app } = this;
-    const user = await ctx.service.user.getUser(ctx.username);
     const result = await ctx.service.orders.addOrder({
-      userId: user.id,
+      userId: ctx.userId,
       houseId: ctx.params("id"),
       isPayed: 0,
       createTime: ctx.helper.time(),
@@ -46,10 +44,9 @@ class OrdersController extends BaseController {
   // 订单列表
   async lists(params) {
     const { ctx, app } = this;
-    const user = await ctx.service.user.getUser(ctx.username);
     const result = await ctx.service.orders.lists({
       ...ctx.params(),
-      userId: user.id,
+      userId: ctx.userId,
     });
     if (result) {
       this.success(result);
