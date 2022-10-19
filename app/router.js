@@ -18,8 +18,9 @@ module.exports = (app) => {
   router.post("/api/house/detail", controller.house.detail);
   router.post("/api/comment/add", controller.comment.add);
   router.post("/api/comment/lists", controller.comment.lists);
-  router.post("/api/orders/hasOrder", controller.orders.hasOrder);
-  router.post("/api/orders/addOrder", controller.orders.addOrder);
-  router.post("/api/orders/delOrder", controller.orders.delOrder);
-  router.post("/api/orders/lists", controller.orders.lists);
+  router.post("/api/orders/hasOrder", userExist, controller.orders.hasOrder);
+  router.post("/api/orders/addOrder", userExist, controller.orders.addOrder);
+  router.post("/api/orders/delOrder", userExist, controller.orders.delOrder);
+  router.post("/api/orders/lists", userExist, controller.orders.lists);
+  router.post("/api/orders/pay", userExist, controller.orders.pay);
 };
