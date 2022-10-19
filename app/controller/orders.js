@@ -42,6 +42,20 @@ class OrdersController extends BaseController {
       this.error("取消失败");
     }
   }
+
+  async lists(params) {
+    const { ctx, app } = this;
+    const user = await ctx.service.user.getUser(ctx.username);
+    const result = await ctx.service.orders.lists({
+      ...ctx.params(),
+      userId: user.id,
+    });
+    if (result) {
+      this.success(result);
+    } else {
+      this.error("查询订单失败");
+    }
+  }
 }
 
 module.exports = OrdersController;
