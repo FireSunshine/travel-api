@@ -114,3 +114,25 @@ create table `orders`(
   `updateTime` timestamp default null comment '更新时间',
   primary key(`id`)
 )engine=InnoDB auto_increment=1 default charset=utf8 comment='订单表';
+
+
+-- 分类表
+create table `category`(
+  `id` int not null auto_increment,
+  `name` varchar(64) not null comment '分类名称',
+  `createTime` timestamp default null comment '创建时间',
+  `updateTime` timestamp default null comment '更新时间',
+  primary key(`id`)
+)engine=InnoDB auto_increment=1 default charset=utf8 comment='产品分类表';
+
+create table `product`(
+  `id` int not null auto_increment,
+  `name` varchar(64) not null comment '商品名称',
+  `price` decimal(10,2) not null comment '商品价格',
+  `images` varchar(255) default null comment '商品图片',
+  `description` text default null comment '商品描述',
+  `categoryId` varchar(64) default null comment '分类id',
+  `createTime` timestamp default null comment '创建时间',
+  `updateTime` timestamp default null comment '更新时间',
+  primary key(`id`)
+)engine=InnoDB auto_increment=1 default charset=utf8 comment='商品表';
