@@ -60,7 +60,13 @@ module.exports = (appInfo) => {
       "/api/user/register",
       "/api/user/login",
       "/api/user/logout",
+      "/api/product/lists",
     ],
+  };
+
+  config.cors = {
+    origin: "*",
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH",
   };
 
   config.redis = {

@@ -14,5 +14,12 @@ module.exports = (app) => {
     createTime: DATE,
     updateTime: DATE,
   });
+
+  Product.associate = () => {
+    app.model.Product.belongsTo(app.model.Category, {
+      foreignKey: "categoryId",
+    });
+  };
+
   return Product;
 };

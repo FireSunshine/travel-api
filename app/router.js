@@ -23,4 +23,5 @@ module.exports = (app) => {
   router.post("/api/orders/delOrder", userExist, controller.orders.delOrder);
   router.post("/api/orders/lists", userExist, controller.orders.lists);
   router.post("/api/orders/pay", userExist, controller.orders.pay);
+  router.post("/api/product/lists", controller.product.productList);
 };
