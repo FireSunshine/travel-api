@@ -132,6 +132,9 @@ create table `product`(
   `images` varchar(255) default null comment '商品图片',
   `description` text default null comment '商品描述',
   `categoryId` varchar(64) default null comment '分类id',
+  `feature` text default null comment '产品特色',
+  `fees` text default null comment '费用',
+  `notes` text default null comment '预订须知',
   `createTime` timestamp default null comment '创建时间',
   `updateTime` timestamp default null comment '更新时间',
   primary key(`id`)

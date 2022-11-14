@@ -13,10 +13,11 @@ class BaseController extends Controller {
 
   error(message = "") {
     const { ctx } = this;
-    ctx.body = {
-      status: 500,
-      message,
-    };
+    ctx.throw(ctx.status, message);
+    // ctx.body = {
+    //   status: 500,
+    //   message,
+    // };
   }
 }
 

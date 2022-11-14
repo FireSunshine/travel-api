@@ -61,6 +61,7 @@ module.exports = (appInfo) => {
       "/api/user/login",
       "/api/user/logout",
       "/api/product/lists",
+      "/api/product/detail",
     ],
   };
 
