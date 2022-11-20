@@ -24,6 +24,17 @@ class ProductController extends BaseController {
       this.error("获取产品详情失败");
     }
   }
+
+  // 搜索产品
+  async search() {
+    const { ctx, app } = this;
+    const result = await ctx.service.product.search(ctx.params());
+    if (result) {
+      this.success(result);
+    } else {
+      this.error("搜索失败");
+    }
+  }
 }
 
 module.exports = ProductController;
