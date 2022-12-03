@@ -26,4 +26,7 @@ module.exports = (app) => {
   router.post("/api/product/lists", controller.product.productList);
   router.post("/api/product/detail", controller.product.detail);
   router.post("/api/product/search", controller.product.search);
+  router.post("/api/shoppingCart/add", controller.shoppingCart.add);
+  router.post("/api/shoppingCart/lists", controller.shoppingCart.lists);
+  router.post("/api/shoppingCart/delCart", controller.shoppingCart.delCart);
 };

@@ -139,3 +139,12 @@ create table `product`(
   `updateTime` timestamp default null comment '更新时间',
   primary key(`id`)
 )engine=InnoDB auto_increment=1 default charset=utf8 comment='商品表';
+
+-- 购物车表
+create table `shoppingCart`(
+  `id` int not null auto_increment,
+  `userId` int not null comment '用户id',
+  `productId` int not null comment '产品id',
+  `createTime` timestamp default null comment '创建时间',
+  primary key(`id`)
+)engine=InnoDB auto_increment=1 default charset=utf8 comment='购物车表';
